@@ -1,7 +1,8 @@
-# firebase-cursor-server aka cursorparty
+# cursorparty
 
-set of react hooks that integrates with firebase
-usable for cursor parties
+set of react hooks for real-time coordinate based page data sharing that integrates with firebase
+
+most usable for cursor parties
 
 can use a generic realtime backend (firebase is just the only impl'd one right now)
 
