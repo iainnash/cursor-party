@@ -30,7 +30,7 @@ export const useCursorEvents = (
 
     function onPointerLeave() {
       lastPosition = null;
-      updateCoordinates({ x: null, y: null });
+      updateCoordinates({ x: -1, y: -1 });
     }
 
     function onDocumentScroll() {

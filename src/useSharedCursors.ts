@@ -48,6 +48,9 @@ export function useSharedCursors<T = void>({
       if (isMyCursor) {
         hasMyCursor = true;
       }
+      if (cursor.x < 0 || cursor.y < 0) {
+        return false;
+      }
       return showMyCursor ? true : !isMyCursor;
     });
 
