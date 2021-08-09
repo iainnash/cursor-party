@@ -76,5 +76,6 @@ export function useSharedCursors<T = void>({
       x: cursor.x * window.innerWidth,
     })),
     setContext,
+    uid,
   };
 }
