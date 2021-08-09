@@ -12,9 +12,9 @@
     "build": "yarn run prepack",
     "prettier": "prettier src example --write",
     "prepack": "yarn clean && yarn run prettier && yarn run tsc",
-    "clean": "rm -rf ./dist"
+    "clean": "rm -rf ./dist && rm -rf ./example/dist/"
   },
-  "repository": "git@github.com:iainnash/cursorparty.git",
+  "repository": "git@github.com:iainnash/cursor-party.git",
   "author": "Iain <iain@zora.co>",
   "license": "MIT",
   "dependencies": {
