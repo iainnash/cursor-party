@@ -9,9 +9,10 @@ import {
 import { useCookieBackedUserId } from "./useCookieBackedUserId";
 import { useCursorEvents } from "./useCursorEvents";
 
-export function useSharedCursors<T = void>(
-  { showMyCursor = false, store }: useSharedCursorsType<T>
-): CursorHookType<T> {
+export function useSharedCursors<T = void>({
+  showMyCursor = false,
+  store,
+}: useSharedCursorsType<T>): CursorHookType<T> {
   const [cursors, setCursors] = useState<Array<CursorDataType<T>>>([]);
   const [myCursor, setMyCursor] = useState<CursorCoordinates | undefined>(
     undefined
@@ -28,9 +29,10 @@ export function useSharedCursors<T = void>(
 
   useEffect(() => {
     store.onUpdates((data: CursorDataType<T>[]) => {
+      console.log("onUpdates");
       setCursors(data);
     });
-  }, [store])
+  }, [store]);
 
   const setContext = useCallback(
     (context: T) => {
@@ -51,23 +53,25 @@ export function useSharedCursors<T = void>(
 
     let myCursorList: CursorDataType<T>[] = [];
     if (!hasMyCursor && myCursor) {
-      myCursorList = [{x: myCursor?.x, y: myCursor.y, uid}];
+      myCursorList = [{ x: myCursor?.x, y: myCursor.y, uid }];
     }
 
-    return [...filteredCursors, ...myCursorList].map((cursor: CursorDataType<T>) => {
-      if (cursor.uid === uid && myCursor) {
-        cursor.x = myCursor.x;
-        cursor.y = myCursor.y;
+    return [...filteredCursors, ...myCursorList].map(
+      (cursor: CursorDataType<T>) => {
+        if (cursor.uid === uid && myCursor) {
+          cursor.x = myCursor.x;
+          cursor.y = myCursor.y;
+        }
+        return cursor;
       }
-      return cursor;
-    });
+    );
   }, [cursors, myCursor]);
 
-
-  console.log(renderingCursors);
-
   return {
-    cursors: renderingCursors.map((cursor) => ({...cursor, x: cursor.x * window.innerWidth})),
+    cursors: renderingCursors.map((cursor) => ({
+      ...cursor,
+      x: cursor.x * window.innerWidth,
+    })),
     setContext,
   };
 }

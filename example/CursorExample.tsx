@@ -1,9 +1,4 @@
-import { useMemo } from "react";
-import firebase from "firebase";
 import { Firestore, useSharedCursors, types } from "../src";
-
-import firebaseConfig from "./firebaseConfig";
-firebase.initializeApp(firebaseConfig);
 
 const fireStore = new Firestore<{ emoji: string }>("my-cursors");
 
@@ -14,9 +9,11 @@ export const CursorExample = () => {
   });
 
   return (
-    <div onMouseDown={() => {
-              setContext({ emoji: "ww" });
-    }}>
+    <div
+      onMouseDown={() => {
+        setContext({ emoji: "ww" });
+      }}
+    >
       {cursors.map(
         ({ uid, x, y, context }: types.CursorDataType<{ emoji: string }>) => (
           <div

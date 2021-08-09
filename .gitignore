@@ -2,3 +2,4 @@ dist/
 .DS_Store
 .parcel-cache
 node_modules
+example/firebaseConfig.ts
