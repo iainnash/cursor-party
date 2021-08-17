@@ -25,19 +25,22 @@ export function useSharedCursors<T = void>({
   useEffect(() => {
     return () => {
       store.stopUpdates();
-    }
-  }, [])
+    };
+  }, []);
   const uid = useCookieBackedUserId({ cookieName: "userId" });
   const debouncedUpdateCoordinates = useMemo(
     () => debounce(store.updateCoordinates),
     [store]
   );
-  useCursorEvents(({ x, y }: CursorCoordinates) => {
-    setMyCursor({ x, y });
-    debouncedUpdateCoordinates(uid, x, y);
-  }, () => {
-    store.removeCursor(uid);
-  });
+  useCursorEvents(
+    ({ x, y }: CursorCoordinates) => {
+      setMyCursor({ x, y });
+      debouncedUpdateCoordinates(uid, x, y);
+    },
+    () => {
+      store.removeCursor(uid);
+    }
+  );
 
   useEffect(() => {
     store.onUpdates((data: CursorDataType<T>[]) => {
@@ -64,7 +67,7 @@ export function useSharedCursors<T = void>({
 
     let myCursorList: CursorDataType<T>[] = [];
     if (!hasMyCursor && myCursor) {
-      myCursorList = [{ x: myCursor?.x, y: myCursor?.y, uid }];
+      myCursorList = [{ x: myCursor.x, y: myCursor.y, uid }];
     }
 
     return [...filteredCursors, ...myCursorList].map(

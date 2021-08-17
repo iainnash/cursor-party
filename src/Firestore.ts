@@ -16,10 +16,10 @@ export class Firestore<T> implements Store<T> {
   };
   removeCursor = (uid: number) => {
     this.getDatabase(uid).remove();
-  }
-  stopUpdates =() => {
-    firebase.database().ref(`/curors-${this.tableName}`).off('value');
-  }
+  };
+  stopUpdates = () => {
+    firebase.database().ref(`/curors-${this.tableName}`).off("value");
+  };
   onUpdates = (updateCallback: (cursors: CursorDataType<T>[]) => void) => {
     firebase
       .database()

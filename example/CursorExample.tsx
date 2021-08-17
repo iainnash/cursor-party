@@ -2,7 +2,7 @@ import { useSharedCursors, types } from "../src";
 
 export const CursorExample = () => {
   const { cursors, setContext } = useSharedCursors<{ emoji: string }>({
-    pageName: 'main',
+    pageName: "main",
     showMyCursor: true,
   });
 
