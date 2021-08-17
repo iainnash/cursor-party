@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { CursorCoordinates } from "./types";
 
 export const useCursorEvents = (
-  updateCoordinates: (coordinates: CursorCoordinates) => void
+  updateCoordinates: (coordinates: CursorCoordinates) => void,
+  pointerLeave: () => void
 ) => {
   useEffect(() => {
     let scroll = {
@@ -30,7 +31,7 @@ export const useCursorEvents = (
 
     function onPointerLeave() {
       lastPosition = null;
-      updateCoordinates({ x: -1, y: -1 });
+      pointerLeave();
     }
 
     function onDocumentScroll() {

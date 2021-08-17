@@ -1,15 +1,21 @@
-import { Firestore, useSharedCursors, types } from "../src";
-
-const fireStore = new Firestore<{ emoji: string }>("my-cursors");
+import { useSharedCursors, types } from "../src";
 
 export const CursorExample = () => {
   const { cursors, setContext } = useSharedCursors<{ emoji: string }>({
-    store: fireStore,
+    pageName: "main",
     showMyCursor: true,
   });
 
   return (
     <div
+      style={{
+        overflow: "hidden",
+        position: "absolute",
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+      }}
       onMouseDown={() => {
         setContext({ emoji: "ww" });
       }}

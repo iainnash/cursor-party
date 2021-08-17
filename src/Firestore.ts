@@ -7,17 +7,23 @@ export class Firestore<T> implements Store<T> {
     this.tableName = tableName;
   }
   getDatabase = (uid: number) =>
-    firebase.database().ref(`/${this.tableName}/${uid}`);
+    firebase.database().ref(`/cursors-${this.tableName}/${uid}`);
   updateContext = (uid: number, context: T) => {
-    this.getDatabase(uid).set({ context });
+    this.getDatabase(uid).update({ context });
   };
   updateCoordinates = (uid: number, x: number, y: number) => {
     this.getDatabase(uid).set({ uid, x, y });
   };
+  removeCursor = (uid: number) => {
+    this.getDatabase(uid).remove();
+  };
+  stopUpdates = () => {
+    firebase.database().ref(`/curors-${this.tableName}`).off("value");
+  };
   onUpdates = (updateCallback: (cursors: CursorDataType<T>[]) => void) => {
     firebase
       .database()
-      .ref(`/${this.tableName}`)
+      .ref(`/cursors-${this.tableName}`)
       .on("value", (snapshot) => {
         const val = snapshot.val();
         if (val) {

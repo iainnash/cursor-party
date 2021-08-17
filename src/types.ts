@@ -2,12 +2,14 @@ export interface Store<T> {
   updateCoordinates: (uid: number, x: number, y: number) => void;
   updateContext: (uid: number, context: T) => void;
   onUpdates: (updateCallback: (cursors: CursorDataType<T>[]) => void) => void;
+  stopUpdates: () => void;
+  removeCursor: (uid: number) => void;
 }
 
 export type useSharedCursorsType<T> = {
   showMyCursor?: boolean;
   getDefaultContext?: () => T;
-  store: Store<T>;
+  pageName: string;
 };
 
 export type CursorCoordinates = {
@@ -23,4 +25,5 @@ export type CursorDataType<T> = CursorCoordinates & {
 export type CursorHookType<T> = {
   cursors: CursorDataType<T>[];
   setContext: (context: T) => void;
+  uid: number;
 };
