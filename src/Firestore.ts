@@ -9,7 +9,7 @@ export class Firestore<T> implements Store<T> {
   getDatabase = (uid: number) =>
     firebase.database().ref(`/cursors-${this.tableName}/${uid}`);
   updateContext = (uid: number, context: T) => {
-    this.getDatabase(uid).set({ context });
+    this.getDatabase(uid).update({ context });
   };
   updateCoordinates = (uid: number, x: number, y: number) => {
     this.getDatabase(uid).set({ uid, x, y });
